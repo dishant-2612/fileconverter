@@ -49,7 +49,6 @@ public class TextPdfConverter implements PdfConverter {
 
     @Override
     public boolean supports(String mimeType, String filename) {
-        // Only handle plain text-like files (don't treat binary office files as text)
         if (mimeType != null && mimeType.startsWith("text/")) return true;
         if (filename != null) {
             String lower = filename.toLowerCase();

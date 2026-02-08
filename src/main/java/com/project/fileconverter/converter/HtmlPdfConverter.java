@@ -17,18 +17,13 @@ public class HtmlPdfConverter implements PdfConverter {
     @Override
     public void convert(File source, File dest) throws IOException {
         try {
-            // 1. Read the raw HTML string
             String rawHtml = Files.readString(source.toPath());
-
-            // 2. Use Jsoup to convert messy HTML -> Valid XHTML
             Document doc = Jsoup.parse(rawHtml);
-            doc.outputSettings().syntax(Document.OutputSettings.Syntax.xml); // CRITICAL: forces self-closing tags (e.g. <br/>)
+            doc.outputSettings().syntax(Document.OutputSettings.Syntax.xml); 
             
-            // 3. Render the clean XHTML to PDF
             try (OutputStream os = Files.newOutputStream(dest.toPath())) {
                 PdfRendererBuilder builder = new PdfRendererBuilder();
                 
-                // Use doc.html() to get the sanitized content
                 builder.withHtmlContent(doc.html(), source.toURI().toString()); 
                 builder.toStream(os);
                 builder.run();
