@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>File Converter</title>
+  <style>body{font-family:Arial;margin:40px}label{display:block;margin-top:10px}</style>
+  <script>
+    async function uploadFile(e){
+      e.preventDefault();
+      const f = document.getElementById('file').files[0];
+      if(!f){ alert('Choose a file'); return }
+      const fd = new FormData(); fd.append('file', f);
+      const res = await fetch('/api/convert', { method:'POST', body: fd });
+      const json = await res.json();
+      const out = document.getElementById('out');
+      out.innerHTML = '';
+      const a1 = document.createElement('a'); a1.href = json.viewUrl; a1.textContent = 'View PDF'; a1.target='_blank';
+      const a2 = document.createElement('a'); a2.href = json.downloadUrl; a2.textContent = 'Download original'; a2.style.marginLeft='10px';
+      out.appendChild(a1); out.appendChild(a2);
+    }
+  </script>
+</head>
+<body>
+  <h1>File Converter</h1>
+  <form onsubmit="uploadFile(event)">
+    <label>Select file to convert to PDF</label>
+    <input id="file" type="file" />
+    <div style="margin-top:10px"><button type="submit">Upload & Convert</button></div>
+  </form>
+  <div id="out" style="margin-top:20px"></div>
+</body>
+</html>
