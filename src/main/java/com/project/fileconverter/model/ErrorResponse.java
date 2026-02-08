@@ -1,4 +1,4 @@
-package com.project.fileconverter.dto;
+package com.project.fileconverter.model;
 
 import lombok.Builder;
 import lombok.Value;

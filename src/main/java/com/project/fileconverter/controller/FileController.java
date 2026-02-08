@@ -1,6 +1,6 @@
 package com.project.fileconverter.controller;
 
-import com.project.fileconverter.dto.ConvertResponse;
+import com.project.fileconverter.model.ConvertResponse;
 import com.project.fileconverter.model.StoredFile;
 import com.project.fileconverter.service.ConverterService;
 import org.springframework.http.HttpHeaders;
