@@ -22,7 +22,7 @@ public class StorageCleanupService {
     private final long retentionDays;
 
     public StorageCleanupService(@Value("${file.storage.location:storage}") String storageLocation,
-                                 @Value("${file.storage.retention-days:30}") long retentionDays) {
+                                 @Value("${file.storage.retention-days:1}") long retentionDays) {
         this.storageDir = Paths.get(storageLocation).toAbsolutePath();
         this.retentionDays = retentionDays;
     }

@@ -7,15 +7,9 @@ services:
     ports:
       - "8080:8080"
     environment:
-      # Use default Linux soffice path in container
-      - file.converter.libreoffice.path=/usr/bin/soffice
-      # IMPORTANT: Disable LibreOffice in Docker (no display server available)
-      # Java-based fallback converters work reliably and don't require X11/Xvfb
-      - file.converter.libreoffice.enabled=false
       - file.storage.location=/app/storage
-      - file.storage.retention-days=30
+      - file.storage.retention-days=1
     volumes:
-      # Persist converted files
       - fileconverter-storage:/app/storage
     restart: unless-stopped
 
